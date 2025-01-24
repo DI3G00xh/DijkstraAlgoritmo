@@ -9,28 +9,28 @@ No modifiqué nada más, solo este readme.
 
 remplazando con esta funcion debería funcionar bien:
 
-vector<vector<int>> leerArchivo(string nombre) {
-    ifstream archivo(nombre);
-    if (!archivo.is_open()) {
-        cerr << "Error al abrir el archivo" << endl;
-        return {};
-    }
-    string linea;
-    getline(archivo, linea); 
-    int n = stoi(linea);
-
-    vector<vector<int>> listaAdyacencia(n, vector<int>(n));
-
-    for (int i = 0; i < n; ++i) {
-        getline(archivo, linea);
-        stringstream ss(linea);
-        string valor;
-        int j = 0;
-        while (getline(ss, valor, ',')) {
-            listaAdyacencia[i][j] = stoi(valor);
-            ++j;
+    vector<vector<int>> leerArchivo(string nombre){
+        ifstream archivo(nombre);
+        if (!archivo.is_open()) {
+            cerr << "Error al abrir el archivo" << endl;
+            return {};
         }
+        string linea;
+        getline(archivo, linea); 
+        int n = stoi(linea);
+    
+        vector<vector<int>> listaAdyacencia(n, vector<int>(n));
+    
+        for (int i = 0; i < n; ++i) {
+            getline(archivo, linea);
+            stringstream ss(linea);
+            string valor;
+            int j = 0;
+            while (getline(ss, valor, ',')) {
+                listaAdyacencia[i][j] = stoi(valor);
+                ++j;
+            }
+        }
+        archivo.close();
+        return listaAdyacencia;
     }
-    archivo.close();
-    return listaAdyacencia;
-}
